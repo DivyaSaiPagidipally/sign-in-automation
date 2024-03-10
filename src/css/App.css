@@ -1,0 +1,36 @@
+h1{  
+  font-size: 40px;
+}
+.overall
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  text-align: center;
+}
+input
+{
+  font-size: 15px;
+  margin-top: 20px;
+}
+label
+{
+  font-size: 25px;
+}
+body
+{
+  background-color: #e9d2e6;
+}
+button
+{
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 25px;
+}
