@@ -24,3 +24,16 @@ resource "aws_instance" "sign-in-demo-terraform-automation" {
   # Required for network setup
   security_groups = ["demo-terraform"]
 }
+
+resource "aws_instance" "sign-in-demo-terraform-automation-duplicate" {
+  # Which virtual machine image this VM should be based on
+  ami = "ami-07d9b9ddc6cd8dd30"
+  # How much hardware resources does this instance need
+  instance_type = "t2.micro"
+  # What commands should be executed when the VM boots
+  user_data = file("install.sh")
+  # The ssh key pair to apply to this virtual machine
+  key_name = "connect-demo-terraform"
+  # Required for network setup
+  security_groups = ["demo-terraform"]
+}
