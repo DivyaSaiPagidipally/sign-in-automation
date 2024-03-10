@@ -141,10 +141,8 @@ resource "local_file" "dynamic_inventory" {
 resource "null_resource" "run_ansible" {
   depends_on = [local_file.dynamic_inventory]
 
-  provisioner "remote-exec" {
-    inline=[
-       "ansible-playbook -i dynamic_inventory.ini deploy-app.yml",
-    ]
-    # working_dir = path.module
+  provisioner "local-exec" {
+    command = "ansible-playbook -i dynamic_inventory.ini deploy-app.yml"
+    working_dir = path.module
   }
 }
