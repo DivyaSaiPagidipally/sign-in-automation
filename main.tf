@@ -7,14 +7,14 @@ terraform {
   }
 }
 
-# terraform{
-#   required_version = ">= 0.12"
-#   backend "s3" {
-#     bucket= "state-file-signin"
-#     key= "path/to/state.tf"
-#     region= "us-east-1"
-#   }
-# }
+terraform{
+  required_version = ">= 0.12"
+  backend "s3" {
+    bucket= "3terraform-2demo-1automation"
+    key= "path/to/state.tf"
+    region= "us-east-1"
+  }
+}
 
 
 provider "aws" {
@@ -37,7 +37,7 @@ variable "key_name" {
 }
 
 // Create Key Pair for Connecting EC2 via SSH
-resource "aws_key_pair" "key_pair1" {
+resource "aws_key_pair" "key_pair_1" {
   key_name   = var.key_name
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
@@ -82,8 +82,8 @@ resource "aws_security_group" "sg_ec2_1" {
 resource "aws_instance" "public_instance" {
   ami                    = "ami-07d9b9ddc6cd8dd30"
   instance_type          = "t2.micro"
-  key_name               = aws_key_pair.key_pair.key_name
-  vpc_security_group_ids = [aws_security_group.sg_ec2.id]
+  key_name               = aws_key_pair.key_pair_1.key_name
+  vpc_security_group_ids = [aws_security_group.sg_ec2_1.id]
 
   tags = {
     Name = "public_instance"
