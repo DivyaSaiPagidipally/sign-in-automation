@@ -144,7 +144,7 @@ resource "null_resource" "run_ansible" {
   provisioner "remote-exec" {
     inline=[
        "ansible-playbook -i dynamic_inventory.ini deploy-app.yml",
-       working_dir = path.module
     ]
+    # working_dir = path.module
   }
 }
