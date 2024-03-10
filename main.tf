@@ -7,11 +7,23 @@ terraform {
   }
 }
 
+terraform{
+  required_version = ">= 0.12"
+  backend "s3" {
+    bucket= "state-file-signin"
+    key= "path/to/state.tf"
+    region= "us-east-1"
+  }
+}
+
+
 provider "aws" {
   region     = "us-east-1"
   access_key = "AKIATZNLDOGR3LTVBWUC"
   secret_key = "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"
 }
+
+
 
 // To Generate Private Key
 resource "tls_private_key" "rsa_4096" {
@@ -25,7 +37,7 @@ variable "key_name" {
 }
 
 // Create Key Pair for Connecting EC2 via SSH
-resource "aws_key_pair" "key_pair" {
+resource "aws_key_pair" "key_pair1" {
   key_name   = var.key_name
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
@@ -41,7 +53,7 @@ resource "local_file" "private_key" {
 }
 
 # Create a security group
-resource "aws_security_group" "sg_ec2" {
+resource "aws_security_group" "sg_ec2_1" {
   name        = "sg_ec2"
   description = "Security group for EC2"
 
