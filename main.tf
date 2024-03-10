@@ -96,10 +96,10 @@ resource "aws_instance" "public_instance" {
     Name = "public_instance"
   }
   
-  root_block_device {
-    volume_size = 30
-    volume_type = "gp2"
-  }
+  # root_block_device {
+  #   volume_size = 30
+  #   volume_type = "gp2"
+  # }
 
   provisioner "local-exec" {
     command = "touch dynamic_inventory.ini"
