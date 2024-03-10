@@ -21,7 +21,7 @@
 
     - name: Clone Node.js app repository
       git:
-        repo: https://github.com/code-sagar/nodejs-demo.git
+        repo: https://github.com/DivyaSaiPagidipally/sign-in-automation.git
         dest: /var/www/html/nodejs-demo
 
     - name: Build Docker image
