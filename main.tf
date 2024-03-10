@@ -33,11 +33,11 @@ resource "tls_private_key" "rsa_4096" {
 
 variable "key_name" {
   description = "Name of the SSH key pair"
-  default= "ssh_key_pair"
+  default= "ssh_key"
 }
 
 // Create Key Pair for Connecting EC2 via SSH
-resource "aws_key_pair" "key_pair_1" {
+resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
@@ -53,8 +53,8 @@ resource "local_file" "private_key" {
 }
 
 # Create a security group
-resource "aws_security_group" "sg_ec2_1" {
-  name        = "sg_ec2"
+resource "aws_security_group" "sg_ec2_demo" {
+  name        = "sg_ec2_demo"
   description = "Security group for EC2"
 
   ingress {
@@ -67,6 +67,13 @@ resource "aws_security_group" "sg_ec2_1" {
   ingress {
     from_port   = 3000
     to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress{
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
