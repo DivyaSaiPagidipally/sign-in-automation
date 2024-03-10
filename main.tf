@@ -7,14 +7,14 @@ terraform {
   }
 }
 
-terraform{
-  required_version = ">= 0.12"
-  backend "s3" {
-    bucket= "state-file-signin"
-    key= "path/to/state.tf"
-    region= "us-east-1"
-  }
-}
+# terraform{
+#   required_version = ">= 0.12"
+#   backend "s3" {
+#     bucket= "state-file-signin"
+#     key= "path/to/state.tf"
+#     region= "us-east-1"
+#   }
+# }
 
 
 provider "aws" {
