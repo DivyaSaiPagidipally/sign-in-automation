@@ -119,6 +119,7 @@ resource "aws_instance" "public_instance" {
   }
 }
 
+
 data "template_file" "inventory" {
   template = <<-EOT
     [ec2_instances]
