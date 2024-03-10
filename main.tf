@@ -37,7 +37,7 @@ variable "key_name" {
 }
 
 // Create Key Pair for Connecting EC2 via SSH
-resource "aws_key_pair" "key_pair" {
+resource "aws_key_pair" "key_pairs" {
   key_name   = var.key_name
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
@@ -53,7 +53,7 @@ resource "local_file" "private_key" {
 }
 
 # Create a security group
-resource "aws_security_group" "sg_ec2_demo" {
+resource "aws_security_group" "sg_ec2s" {
   name        = "sg_ec2_demo"
   description = "Security group for EC2"
 
@@ -89,8 +89,8 @@ resource "aws_security_group" "sg_ec2_demo" {
 resource "aws_instance" "public_instance" {
   ami                    = "ami-07d9b9ddc6cd8dd30"
   instance_type          = "t2.micro"
-  key_name               = aws_key_pair.key_pair.key_name
-  vpc_security_group_ids = [aws_security_group.sg_ec2_demo.id]
+  key_name               = aws_key_pair.key_pairs.key_name
+  vpc_security_group_ids = [aws_security_group.sg_ec2s.id]
 
   tags = {
     Name = "public_instance"
